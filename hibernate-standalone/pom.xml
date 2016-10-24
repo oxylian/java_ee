@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.oxylian.java_ee</groupId>
+		<artifactId>parent</artifactId>
+		<version>0.1.0</version>
+	</parent>
+
+	<artifactId>hibernate-standalone</artifactId>
+	<packaging>jar</packaging>
+
+	<dependencies>
+		<dependency>
+		    <groupId>javax</groupId>
+		    <artifactId>javaee-api</artifactId>
+		    <version>7.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>${postgresql.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>${h2.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>${exec-maven-plugin.version}</version>
+				<configuration>
+					<mainClass>com.oxylian.java_ee.hibernate.Main</mainClass>
+
+					<systemProperties>
+						<systemProperty>
+							<key>javax.persistence.jdbc.driver</key>
+							<value>${javax.persistence.jdbc.driver}</value>
+						</systemProperty>
+
+						<systemProperty>
+							<key>javax.persistence.jdbc.url</key>
+							<value>${javax.persistence.jdbc.url}</value>
+						</systemProperty>
+
+						<systemProperty>
+							<key>javax.persistence.jdbc.user</key>
+							<value>${javax.persistence.jdbc.user}</value>
+						</systemProperty>
+
+						<systemProperty>
+							<key>javax.persistence.jdbc.password</key>
+							<value>${javax.persistence.jdbc.password}</value>
+						</systemProperty>
+					</systemProperties>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
