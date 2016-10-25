@@ -15,25 +15,10 @@
 
 package com.oxylian.java_ee.hibernate.entity;
 
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 
-import org.hibernate.annotations.TypeDef;
-import org.hibernate.annotations.TypeDefs;
-
-import com.oxylian.java_ee.hibernate.JsonBinaryType;
-import com.oxylian.java_ee.hibernate.JsonStringType;
-
-@TypeDefs({ @TypeDef(name = "json", typeClass = JsonStringType.class), @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class) })
-@MappedSuperclass
-public class BaseEntity {
-	@Id
-	@GeneratedValue
-	private Long id;
-
-	public Long getId() {
-		return id;
-	}
+@Entity
+@DiscriminatorValue("Location")
+public class LocationEntity extends Entity1<Location> {
 }

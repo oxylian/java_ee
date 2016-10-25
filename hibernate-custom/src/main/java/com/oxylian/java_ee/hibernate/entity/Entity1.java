@@ -15,25 +15,32 @@
 
 package com.oxylian.java_ee.hibernate.entity;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Table;
 
-import org.hibernate.annotations.TypeDef;
-import org.hibernate.annotations.TypeDefs;
+import org.hibernate.annotations.Type;
 
-import com.oxylian.java_ee.hibernate.JsonBinaryType;
-import com.oxylian.java_ee.hibernate.JsonStringType;
+@Entity
+@Table(name = "entity1")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "type")
+public class Entity1<Content> extends BaseEntity {
+	@Type(type = "jsonb")
+	@Column(columnDefinition = "jsonb")
+	@Basic(fetch = FetchType.LAZY)
+	private Content content;
 
-@TypeDefs({ @TypeDef(name = "json", typeClass = JsonStringType.class), @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class) })
-@MappedSuperclass
-public class BaseEntity {
-	@Id
-	@GeneratedValue
-	private Long id;
+	public Content getContent() {
+		return content;
+	}
 
-	public Long getId() {
-		return id;
+	public void setContent(Content content) {
+		this.content = content;
 	}
 }

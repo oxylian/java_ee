@@ -22,9 +22,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import com.oxylian.java_ee.hibernate.entity.Entity1;
 import com.oxylian.java_ee.hibernate.entity.Event;
 import com.oxylian.java_ee.hibernate.entity.Location;
+import com.oxylian.java_ee.hibernate.entity.LocationEntity;
 import com.oxylian.java_ee.hibernate.entity.Participant;
+import com.oxylian.java_ee.hibernate.entity.Person;
+import com.oxylian.java_ee.hibernate.entity.PersonEntity;
 import com.oxylian.java_ee.hibernate.entity.Ticket;
 
 public class Main {
@@ -57,6 +61,21 @@ public class Main {
 	    participant.setEvent(event);
 	 
 	    entityManager.persist(participant);
+	    
+	    PersonEntity p1 = new PersonEntity();
+	    p1.setContent(new Person());
+	    p1.getContent().setFirstName("a");
+	    p1.getContent().setLastName("b");
+	    p1.getContent().setAge(20);
+
+	    entityManager.persist(p1);
+
+	    LocationEntity l1 = new LocationEntity();
+	    l1.setContent(new Location());
+	    l1.getContent().setCity("Paris");
+	    l1.getContent().setCountry("France");
+	    
+	    entityManager.persist(l1);
 	    
 	    entityManager.getTransaction().commit();
 	    
